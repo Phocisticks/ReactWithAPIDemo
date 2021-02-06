@@ -18,7 +18,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const App = () => {
-
   return (
     <CenteredGrid />
   )
@@ -27,13 +26,6 @@ const App = () => {
 const CenteredGrid = () => {
   const classes = useStyles();
   const [json, setJSON] = useState({})
-
-  useEffect(() => {
-    get('https://jsonplaceholder.typicode.com/todos')
-      .then(data => {
-        setJSON(data)
-      });
-  }, [])
 
   return (
     <div className={classes.root}>
@@ -62,26 +54,13 @@ const LeftColumn = (data) => {
 }
 
 const RightColumn = (data) => {
-  console.log(data)
   const todos = data.json;
   if (!todos.length) {
     return 'hello there!'
   }
   return (
     <div>
-      {todos.map((item, index) => (
-        <Todo data={item} />
-      ))}
     </div>
-  )
-}
-
-const Todo = ({ data }) => {
-  return (
-    <Paper>
-      <span>{data.completed ? <Good /> : <Bad />}</span>
-      <span>{data.title}</span>
-    </Paper>
   )
 }
 
